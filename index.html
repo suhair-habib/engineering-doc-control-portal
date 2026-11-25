@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Engineering Document Control & Operations Portal</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div>
+        <h1>Engineering Document Control & Operations Portal</h1>
+        <p class="subtitle">Revision Tracking • Transmittal Logs • Vendor Approval Workflows</p>
+      </div>
+      <span class="badge">EDMS v1.0</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- KPI Summary Cards -->
+    <section class="kpi-grid" aria-label="Document Metrics">
+      <div class="kpi-card">
+        <span class="kpi-label">Total Controlled Docs</span>
+        <strong class="kpi-value" id="kpiTotal">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Issued for Construction (IFC)</span>
+        <strong class="kpi-value status-ifc" id="kpiIfc">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Under Review (IFR)</span>
+        <strong class="kpi-value status-ifr" id="kpiIfr">0</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="kpi-label">Action Required / Hold</span>
+        <strong class="kpi-value status-hold" id="kpiHold">0</strong>
+      </div>
+    </section>
+
+    <!-- New Document / Revision Entry Form -->
+    <section class="panel">
+      <h2>Log New Document / Revision</h2>
+      <form id="docForm" class="doc-form">
+        <input type="text" id="docNumber" placeholder="Doc No. (e.g., ENG-P&ID-104)" required />
+        <input type="text" id="docTitle" placeholder="Document Title" required />
+        <select id="discipline" required>
+          <option value="Controls & Automation">Controls & Automation</option>
+          <option value="Electrical">Electrical</option>
+          <option value="Mechanical">Mechanical</option>
+          <option value="Civil / Structural">Civil / Structural</option>
+          <option value="QA / Commissioning">QA / Commissioning</option>
+        </select>
+        <input type="text" id="revision" placeholder="Rev (e.g., Rev B)" required />
+        <input type="text" id="vendor" placeholder="Vendor / Subcontractor" required />
+        <select id="status" required>
+          <option value="IFR">IFR (Issued for Review)</option>
+          <option value="IFC">IFC (Issued for Construction)</option>
+          <option value="HOLD">HOLD (Pending Vendor Input)</option>
+        </select>
+        <button type="submit" class="btn-primary">+ Add to Register</button>
+      </form>
+    </section>
+
+    <!-- Filter & Master Document Register -->
+    <section class="panel">
+      <div class="register-header">
+        <h2>Master Document Register (MDR)</h2>
+        <div class="filters">
+          <input type="search" id="searchInput" placeholder="Search doc #, title, or vendor..." />
+          <select id="statusFilter">
+            <option value="ALL">All Statuses</option>
+            <option value="IFC">IFC Only</option>
+            <option value="IFR">IFR Only</option>
+            <option value="HOLD">HOLD Only</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Document No.</th>
+              <th>Title</th>
+              <th>Discipline</th>
+              <th>Revision</th>
+              <th>Vendor / Owner</th>
+              <th>Status</th>
+              <th>Last Updated</th>
+              <th>Workflow Action</th>
+            </tr>
+          </thead>
+          <tbody id="docTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
